@@ -1,9 +1,14 @@
-import '../../App.css';
+import History from "./history";
+import Search from "./search";
+import Weather from "./weather";
 
 const Body = () => {
     return (
-        <div className="App">
-            Hello
+        <div className="Body">
+            <Search />
+            <Weather />
+            <hr className="solid" />
+            <History />
         </div>
     );
 }
