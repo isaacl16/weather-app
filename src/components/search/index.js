@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getGeographicCoordinates, getWeather } from "../../../api";
-import { appendHistory, setWeather } from "../weatherSlice";
+import { getWeather } from "../../features/weatherSlice";
 import styles from "./search.module.css";
 
 
@@ -14,33 +13,26 @@ const Search = () => {
         // e.preventDefault() prevents the page from refreshing
         e.preventDefault();
         searchWeather(city, country)
-        handleOnClear();
+        clearInputFields();
     };
 
-    const searchWeather = async (city, country) => {
+    const searchWeather = (city, country) => {
         console.log("Dispatch setWeather")
-        const geographicCoordinates = await getGeographicCoordinates(city, country)
-        console.log(geographicCoordinates)
-        const location = geographicCoordinates.find(location => (location.country.name).toLowerCase() === country.toLowerCase())
-        if (location !== undefined) {
-            const currentWeather = await getWeather(location.lat, location.lon)
-            currentWeather["city"] = city
-            currentWeather["country"] = country
-            dispatch(setWeather(currentWeather))
-            dispatch(appendHistory(currentWeather))
-            // dispatch(setWeather({ city, country }))
-        } else {
-            // Toast here
-            console.log("Could not find location")
-        }
-        // write api call to https://openweathermap.org/api here
-        // reducers should stay as pure functions
+        const query = city + "," + country
+        dispatch(getWeather(query))
+        // dispatch(setWeather(currentWeather))
+        // dispatch(appendHistory(currentWeather))
     }
 
-    const handleOnClear = () => {
+    const clearInputFields = () => {
         setCity("")
         setCountry("")
     }
+
+    const disableClearButton = () => {
+        return city.length === 0 && country.length === 0
+    }
+
     return (
         <div className={styles.search}>
             <form onSubmit={handleSubmit}>
@@ -53,7 +45,7 @@ const Search = () => {
                 </label>
                 <input type="text" name="country" value={country} className={styles.input} onChange={(e) => { setCountry(e.target.value) }} required />
                 <input type="submit" value="Submit" className={styles.button} />
-                <input type="button" value="Clear" className={styles.button} onClick={handleOnClear} />
+                <input type="button" value="Clear" className={styles.button} onClick={clearInputFields} disabled={disableClearButton()} />
             </form>
         </div >
     )
