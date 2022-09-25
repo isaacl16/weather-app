@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteHistory, getWeather } from "../../features/weatherSlice";
 import { selectHistory } from "../../redux/selectors";
-import styles from "./history.module.css";
+import styles from "./weatherHistory.module.css";
 
-const History = () => {
+const WeatherHistory = () => {
     const dispatch = useDispatch()
     const history = useSelector(selectHistory)
     const removeHistory = (index) => {
@@ -34,4 +34,4 @@ const History = () => {
     )
 }
 
-export default History
+export default WeatherHistory

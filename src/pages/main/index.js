@@ -1,17 +1,17 @@
-import Header from "../../components/header";
-import History from "../../components/history";
-import Search from "../../components/search";
-import Weather from "../../components/weather";
+import Header from "../../containers/Header";
+import Weather from "../../containers/WeatherContainer";
+// import Weather from "../../components/weather";
 
 const Main = () => {
     return (
         <>
             <Header />
             <hr className="solid" />
-            <Search />
+            {/* <Search /> */}
             <Weather />
+            {/* <Weather />
             <hr className="solid" />
-            <History />
+            <History /> */}
         </>
     )
 }
