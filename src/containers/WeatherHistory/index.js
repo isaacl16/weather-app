@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteHistory, getWeather } from "../../features/weatherSlice";
 import { selectHistory } from "../../redux/selectors";
-import styles from "./weatherHistory.module.css";
+import { DeleteIcon, SearchIcon, StyledButton, StyledHeader, StyledRight, StyledRow, StyledWrapper } from "./styled";
+
 
 const WeatherHistory = () => {
     const dispatch = useDispatch()
@@ -15,22 +16,21 @@ const WeatherHistory = () => {
         dispatch(getWeather(queryString))
     }
     return (
-        <div className={styles.history}>
-            {
-                <ol>
-                    {history.map((weather, index) => {
-                        return (
-                            <li key={index}>
-                                {weather.city + ", " + weather.country}
-                                {weather.timeZone}
-                                <button onClick={() => reSearchWeather(weather)}>Re-Search</button>
-                                <button onClick={() => removeHistory(index)}>Delete</button>
-                            </li>
-                        )
-                    })}
-                </ol>
-            }
-        </div>
+        <StyledWrapper>
+            <StyledHeader>History</StyledHeader>
+            {history.map((item, index) => {
+                return (
+                    <StyledRow key={index}>
+                        <p>{index + 1}.  {item.city + ", " + item.country}</p>
+                        <StyledRight>
+                            <p>{item.time}</p>
+                            <StyledButton onClick={() => reSearchWeather(item)}><SearchIcon /></StyledButton>
+                            <StyledButton onClick={() => removeHistory(index)}><DeleteIcon /></StyledButton>
+                        </StyledRight>
+                    </StyledRow>
+                )
+            })}
+        </StyledWrapper >
     )
 }
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { fetchWeather } from "../api"
+import { formatTime, tempRange } from "../utils"
 
 export const getWeather = createAsyncThunk(
     'weather/getWeather',
@@ -18,13 +19,11 @@ export const getWeather = createAsyncThunk(
                     weather: {
                         country: data.name,
                         city: data.sys.country,
-                        time: data.timezone,
                         main: data.weather[0].main,
                         description: data.weather[0].description,
-                        temp_min: data.main.temp_min,
-                        temp_max: data.main.temp_max,
+                        temperature: tempRange(data.main.temp_min, data.main.temp_max),
                         humidity: data.main.humidity,
-                        timezone: data.timezone
+                        time: formatTime(data.dt, data.timezone),
                     }
                 }
             } else {

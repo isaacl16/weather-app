@@ -1,24 +1,35 @@
 import { useSelector } from "react-redux"
 import { selectWeather } from "../../redux/selectors"
+import { StyledImage, WeatherBox, Wrapper } from "./styled"
 
 const WeatherResults = () => {
     const weather = useSelector(selectWeather)
+    console.log(weather)
     return (
         <>
             {
                 weather ?
-                    <p>
-                        City: {weather.city + ", " + weather.country}
-                        <br />
-                        {weather.main}
-                        <br />
-                        description: {weather.description}
-                        <br />
-                        temperature: {weather.temperature}
-                        <br />
-                        humidity: {weather.humidity}
-                        <br />
-                    </p>
+                    <Wrapper>
+                        <WeatherBox>
+                            <p>
+                                City: {weather.city + ", " + weather.country}
+                            </p>
+                            <StyledImage weather={weather.main} />
+                            <p>
+                                Description: {weather.description}
+                            </p>
+                            <p>
+                                Temperature: {weather.temperature}
+                            </p>
+
+                            <p>
+                                Humidity: {weather.humidity}
+                            </p>
+                            <p>
+                                Time: {weather.time}
+                            </p>
+                        </WeatherBox>
+                    </Wrapper>
                     : <></>
             }
         </>

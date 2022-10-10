@@ -1,11 +1,13 @@
-import './navbar.css';
+import { StyledHeader, Wrapper } from "./styled";
 
-const NavBar = () => {
+const Header = () => {
     return (
-        <div className="header">
-            <h1 className="header-logo">Today's Weather</h1>
-        </div>
-    );
+        <>
+            <Wrapper>
+                <StyledHeader>Today's Weather</StyledHeader>
+            </Wrapper>
+        </>
+    )
 }
+export default Header
 
-export default NavBar;

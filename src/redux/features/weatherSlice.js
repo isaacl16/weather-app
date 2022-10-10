@@ -21,8 +21,7 @@ export const getWeather = createAsyncThunk(
                         time: data.timezone,
                         main: data.weather[0].main,
                         description: data.weather[0].description,
-                        temp_min: data.main.temp_min,
-                        temp_max: data.main.temp_max,
+                        temperature: data.main.temp_min + "℃ - " + data.main.temp_max + "℃",
                         humidity: data.main.humidity,
                         timezone: data.timezone
                     }
@@ -70,6 +69,7 @@ export const weatherSlice = createSlice({
             if (state.history.length >= 10) {
                 state.history.splice(9, 1);
             }
+            state.status = 'success'
             state.history.unshift(action.payload.search)
             state.error = null;
         },
