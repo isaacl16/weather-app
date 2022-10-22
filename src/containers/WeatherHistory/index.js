@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deleteHistory, getWeather } from "../../features/weatherSlice";
+import { deleteHistory, getWeather } from "../../redux/features/weatherSlice";
 import { selectHistory } from "../../redux/selectors";
 import { DeleteIcon, SearchIcon, StyledButton, StyledHeader, StyledRight, StyledRow, StyledWrapper } from "./styled";
 

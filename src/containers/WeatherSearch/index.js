@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWeather } from "../../features/weatherSlice";
+import { getWeather } from "../../redux/features/weatherSlice";
 import { selectStatus } from "../../redux/selectors";
 import { ButtonWrapper, InputWrapper, Wrapper } from "./styled";
 import styles from "./wearchSearch.module.css";

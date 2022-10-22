@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearError } from '../../features/weatherSlice'
+import { clearError } from '../../redux/features/weatherSlice'
 import { selectError } from '../../redux/selectors'
 
 const WeatherError = () => {
