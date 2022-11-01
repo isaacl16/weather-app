@@ -7,7 +7,6 @@ export const getWeather = createAsyncThunk(
     async (queryString, { rejectWithValue }) => {
         try {
             const res = await fetchWeather(queryString)
-            console.log(res)
             const data = res.data
             if (res.data !== null) {
                 return {
@@ -63,7 +62,6 @@ export const weatherSlice = createSlice({
             state.error = null;
         },
         [getWeather.fulfilled]: (state, action) => {
-            console.log(action.payload.weather)
             state.data = action.payload.weather;
             if (state.history.length >= 10) {
                 state.history.splice(9, 1);

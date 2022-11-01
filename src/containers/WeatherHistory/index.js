@@ -13,7 +13,6 @@ const WeatherHistory = () => {
     }, [dispatch])
     const reSearchWeather = useCallback((weather) => {
         const queryString = weather.city + "," + weather.country
-        console.log(queryString)
         dispatch(getWeather(queryString))
     }, [dispatch])
 
