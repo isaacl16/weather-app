@@ -1,19 +1,32 @@
 import styled from "styled-components"
+import colors from "../../theme/colors"
 
 export const StyledHeader = styled.h1`
-    text-align: start;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    color: ${colors.main}
 `
 
 export const StyledWrapper = styled.div`
-    displa
+    display: block;
     text-align: start;
-    margin-top: 30px;
+    margin: 0 auto;
+    width: 75%;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+    p {
+        text-align: center;
+    }
 `
 
 export const StyledRow = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
 `
 
 export const StyledRight = styled.div`

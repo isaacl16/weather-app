@@ -5,4 +5,5 @@ export default {
     'Rain': '-366px -165px',
     'Snow': '-294px -238px',
     'Clouds': '-6px -310px',
+    'Mist': '-366px -100px',
 };

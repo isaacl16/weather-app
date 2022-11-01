@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { fetchWeather } from "../../api"
-import { formatTime, tempRange } from "../../utils"
+import { formatTime, getCurrentTime, tempRange } from "../../utils"
 
 export const getWeather = createAsyncThunk(
     'weather/getWeather',
@@ -14,7 +14,7 @@ export const getWeather = createAsyncThunk(
                     search: {
                         city: data.name,
                         country: data.sys.country,
-                        time: data.timezone
+                        time: getCurrentTime()
                     },
                     weather: {
                         country: data.name,
@@ -61,7 +61,6 @@ export const weatherSlice = createSlice({
             state.status = 'loading';
             state.data = null;
             state.error = null;
-            console.log("in pending")
         },
         [getWeather.fulfilled]: (state, action) => {
             console.log(action.payload.weather)
@@ -76,7 +75,6 @@ export const weatherSlice = createSlice({
             state.status = 'failed';
             state.data = null;
             state.error = action.payload?.error;
-            console.log("in error")
         },
     },
 })

@@ -1,26 +1,38 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
-export const Wrapper = styled.div`
-    margin-top: 2rem;
+export const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;  justify-content: center;
+
+`;
+
+export const SearchWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-`
-
-export const InputWrapper = styled.div`
-
-`
-
+    div {
+      width: 300px;
+      justify-content: space-between;
+      display: flex;
+      margin-bottom: 1rem;
+    }
+`;
 export const ButtonWrapper = styled.div`
-    margin-top: 1rem;
-`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1rem 0;
+    button {
+      width: 120px;
+    }
+`;
 
-export const Button = styled.button`
-
-`
-export const Input = styled.input``
-
-export const label = styled.label`
-
-`
+export const StyledSearchBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
+  p {
+    margin: 0 10px 0 0;
+  }
+`;

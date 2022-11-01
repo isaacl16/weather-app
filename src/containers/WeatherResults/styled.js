@@ -6,9 +6,10 @@ export const WeatherBox = styled.div`
     border: 1px solid #000000;
     margin: 2rem auto;
     padding: 1rem 2rem;
+    text-align: center;
 `
 
-export const Wrapper = styled.div`
+export const StyledWrapper = styled.div`
     display: flex;
 `
 

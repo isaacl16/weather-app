@@ -1,5 +1,4 @@
-.App {
-  text-align: center;
-  margin: auto;
-  width: 80%;
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
 }

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Button from '../../components/Button';
+import Search from '../../components/Search';
 import { getWeather } from "../../redux/features/weatherSlice";
 import { selectStatus } from "../../redux/selectors";
-import { ButtonWrapper, InputWrapper, Wrapper } from "./styled";
-import styles from "./wearchSearch.module.css";
-
+import { ButtonWrapper, SearchWrapper, StyledSearchBar, StyledWrapper } from './styled';
 
 const WeatherSearch = () => {
     const [city, setCity] = useState("");
@@ -13,21 +13,22 @@ const WeatherSearch = () => {
     const status = useSelector(selectStatus)
 
     const dispatch = useDispatch();
-    const handleSubmit = (e) => {
-        // e.preventDefault() prevents the page from refreshing
-        e.preventDefault();
-        searchWeather(city, country)
-    };
 
-    const searchWeather = (city, country) => {
-        const query = city + "," + country
-        dispatch(getWeather(query))
-    }
+    const searchWeather = useCallback(() => {
+        const queryString = [city, country].filter(x => x.trim() !== '').join(',');
+        dispatch(getWeather(queryString))
+    }, [city, country, dispatch])
 
-    const clearInputFields = () => {
-        setCity("")
-        setCountry("")
-    }
+    const clearSearchFields = useCallback(() => {
+        setCity('');
+        setCountry('');
+    }, []);
+
+    const checkEnter = useCallback((e) => {
+        if (e.key === 'Enter') {
+            searchWeather();
+        }
+    }, [searchWeather]);
 
     useEffect(() => {
         if (status === 'success') {
@@ -42,26 +43,26 @@ const WeatherSearch = () => {
         return city.length === 0 && country.length === 0
     }
 
+
     return (
-        <form onSubmit={handleSubmit}>
-            <Wrapper>
-                <InputWrapper>
-                    <label>
-                        City:
-                    </label>
-                    <input type="text" name="city" value={city} className={styles.input} onChange={(e) => { setCity(e.target.value) }} required />
-                    <label className={styles.label}>
-                        Country:
-                    </label>
-                    <input type="text" name="country" value={country} className={styles.input} onChange={(e) => { setCountry(e.target.value) }} required />
-                </InputWrapper>
-                <ButtonWrapper>
-                    <input type="submit" value="Submit" className={styles.button} />
-                    <input type="button" value="Clear" className={styles.button} onClick={clearInputFields} disabled={disableClearButton()} />
-                </ButtonWrapper>
-            </Wrapper>
-        </form>
-    )
+        <StyledWrapper>
+            <SearchWrapper>
+                <StyledSearchBar>
+                    <p>City:</p>
+                    <Search value={city} onChange={e => setCity(e.target.value)} onKeyPress={checkEnter} />
+                </StyledSearchBar>
+                <StyledSearchBar>
+                    <p>Country:</p>
+                    <Search value={country} onChange={e => setCountry(e.target.value)} onKeyPress={checkEnter} />
+
+                </StyledSearchBar>
+            </SearchWrapper>
+            <ButtonWrapper>
+                <Button onClick={searchWeather} disabled={!(city || country)}>Search</Button>
+                <Button outline={true} onClick={clearSearchFields} disabled={!(city || country)}>Clear</Button>
+            </ButtonWrapper>
+        </StyledWrapper>
+    );
 }
 
 export default WeatherSearch;
