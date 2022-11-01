@@ -25,5 +25,5 @@ REACT_APP_OPENWEATHER_API_KEY = '<OpenWeather API Key>'
 4. Run the application
 
 ```
-npm run start
+npm start
 ```
