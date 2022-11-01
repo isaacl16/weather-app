@@ -5,8 +5,7 @@ import { StyledImage, StyledWrapper, WeatherBox } from "./styled"
 
 const WeatherResults = () => {
     const weather = useSelector(selectWeather)
-    console.log(weather)
-
+  
     const renderWeather = useMemo(() => {
         return weather ?
             <WeatherBox>
